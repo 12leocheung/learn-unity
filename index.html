@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A hands-on learning path for C# scripting in Unity, from first principles to editor internals, machine learning, and multiplayer.">
+<title>Unity Script School — Learn by building</title>
+<style>
+:root{color-scheme:dark;--bg:#10120f;--panel:#181c17;--panel2:#20251f;--line:#30382e;--text:#edf1e9;--muted:#a1ad9c;--faint:#748071;--green:#a7e26e;--mint:#72d6a0;--yellow:#f0cb71;--red:#ff927e;--blue:#8bc5ef;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 var(--sans)}a{color:var(--green)}button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:3px}::selection{background:#a7e26e55}.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:18px;padding:12px clamp(16px,4vw,48px);background:#10120fee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:750;white-space:nowrap}.mark{width:26px;height:26px;display:grid;place-items:center;border-radius:7px;background:var(--green);color:#13200e;font-weight:900}.search{margin-left:auto;width:min(320px,40vw);padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text)}.progress-wrap{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px;white-space:nowrap}.progress{width:76px;height:6px;border-radius:20px;background:var(--line);overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--green);transition:width .2s}.layout{display:grid;grid-template-columns:245px minmax(0,1fr);max-width:1440px;margin:auto}.sidebar{position:sticky;top:62px;height:calc(100vh - 62px);overflow:auto;padding:28px 18px;border-right:1px solid var(--line)}.side-label,.eyebrow,.tag{font:11px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--faint)}.side-label{margin:18px 10px 8px}.side-label:first-child{margin-top:0}.nav{display:grid;gap:3px}.nav a{padding:8px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:13px}.nav a:hover,.nav a.active{background:#a7e26e15;color:var(--green)}.nav a span{display:inline-grid;place-items:center;width:24px;margin-right:7px;color:var(--faint);font:10px var(--mono)}main{min-width:0;padding:48px clamp(20px,6vw,82px) 100px;max-width:1100px}.hero{padding:8px 0 48px;border-bottom:1px solid var(--line);margin-bottom:32px}.eyebrow{color:var(--green)}h1,h2,h3{line-height:1.2;letter-spacing:-.035em}h1{font-size:clamp(38px,6vw,66px);max-width:850px;margin:16px 0}.hero p{max-width:700px;color:var(--muted);font-size:17px}.hero-stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;color:var(--muted);font-size:13px}.hero-stats strong{color:var(--text)}.section{padding:32px 0 48px;border-bottom:1px solid var(--line);scroll-margin-top:78px}.section-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}.section-num{font:12px var(--mono);color:var(--green);padding-top:5px}.section h2{font-size:clamp(26px,4vw,36px);margin:0 0 8px}.section-intro{max-width:760px;margin:0;color:var(--muted)}.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}.lesson,.exercise,.callout,.sim-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}.lesson h3,.exercise h3,.sim-card h3{font-size:17px;margin:0 0 9px;letter-spacing:-.015em}.lesson p,.exercise p{color:var(--muted);margin:0 0 12px}.lesson ul{margin:8px 0;padding-left:19px;color:var(--muted)}.lesson li{padding:2px 0}.wide{grid-column:1/-1}.code{position:relative;margin:14px 0 0;background:#0d100d;border:1px solid #252d24;border-radius:9px;overflow:auto}.code pre{margin:0;padding:16px 18px;color:#dbe8d0;font:13px/1.75 var(--mono);white-space:pre}.code-label{padding:7px 13px;border-bottom:1px solid #252d24;color:var(--faint);font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase}.inline{font:12px var(--mono);background:var(--panel2);border:1px solid var(--line);padding:2px 5px;border-radius:4px;color:var(--green)}.callout{margin:18px 0;padding:14px 17px;border-left:3px solid var(--yellow);color:var(--muted)}.callout strong{color:var(--yellow)}.callout.info{border-left-color:var(--blue)}.exercise{margin:18px 0;border-color:#56734466;background:linear-gradient(145deg,#192117,#151915)}.exercise .tag{color:var(--green);margin-bottom:8px;display:block}.exercise select,.exercise textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:#10130f;color:var(--text)}.exercise textarea{min-height:130px;resize:vertical;font:13px/1.6 var(--mono)}.actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:12px}.btn{border:1px solid var(--line);background:var(--panel2);padding:8px 13px;border-radius:7px;font-weight:650;font-size:13px}.btn:hover{border-color:var(--green);color:var(--green)}.btn.primary{background:var(--green);color:#10200d;border-color:var(--green)}.btn.primary:hover{filter:brightness(1.08);color:#10200d}.result{min-height:24px;margin-top:10px;font-size:13px;color:var(--muted)}.result.good{color:var(--green)}.result.bad{color:var(--red)}.complete-btn{margin:5px 0 0;border:1px solid var(--line);border-radius:7px;padding:8px 12px;background:transparent;color:var(--muted);font-size:12px}.complete-btn.done{border-color:#6ea856;color:var(--green);background:#a7e26e10}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{font:11px var(--mono);padding:5px 9px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:99px}.diagram{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:16px 0}.diagram div{padding:12px;background:#111510;border:1px solid var(--line);border-radius:8px;text-align:center;color:var(--muted);font-size:12px}.diagram strong{display:block;color:var(--green);font:12px var(--mono);margin-bottom:5px}.sim-card{margin:18px 0}.sim-stage{height:220px;position:relative;overflow:hidden;background:#101510;border:1px solid var(--line);border-radius:8px;margin:12px 0}.agent{position:absolute;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:#12200f;font:10px var(--mono);transition:left .35s,top .35s}.target{position:absolute;right:17px;top:16px;color:var(--yellow);font:11px var(--mono)}.sim-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}.sim-controls input{accent-color:var(--green)}.sim-log{color:var(--muted);font:12px var(--mono);min-height:22px}.table-wrap{overflow:auto;margin:14px 0}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--green);font:11px var(--mono);text-transform:uppercase}td{color:var(--muted)}footer{padding:38px 0 0;color:var(--faint);font-size:12px}.no-results{display:none;padding:50px;text-align:center;color:var(--muted)}@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:relative;top:auto;height:auto;max-height:190px;border-right:0;border-bottom:1px solid var(--line);padding:10px 15px}.sidebar .side-label{display:none}.nav{display:flex;overflow:auto}.nav a{white-space:nowrap}.nav a span{display:none}main{padding-top:30px}.top{gap:10px}.progress-wrap{display:none}}@media(max-width:600px){.search{width:38vw}.brand{font-size:13px}.lesson-grid{grid-template-columns:1fr}.wide{grid-column:auto}.diagram{grid-template-columns:repeat(2,1fr)}.hero-stats{gap:12px}.section{padding-top:25px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#start"><span class="mark">U</span> Unity Script School</a>
+  <input class="search" id="search" type="search" placeholder="Search lessons…" aria-label="Search course lessons">
+  <div class="progress-wrap" aria-live="polite"><span id="progressText">0 / 8 done</span><span class="progress"><i id="progressBar"></i></span></div>
+</header>
+<div class="layout">
+<aside class="sidebar" aria-label="Course navigation">
+  <div class="side-label">Learning path</div>
+  <nav class="nav" id="courseNav">
+    <a href="#start"><span>00</span>Start here</a><a href="#csharp"><span>01</span>C# foundations</a><a href="#unity"><span>02</span>Unity &amp; components</a><a href="#gameplay"><span>03</span>Gameplay scripting</a><a href="#editor"><span>04</span>The Editor</a><a href="#systems"><span>05</span>Built-in systems</a><a href="#ml"><span>06</span>ML-Agents</a><a href="#multiplayer"><span>07</span>Multiplayer</a><a href="#shipping"><span>08</span>Debug &amp; ship</a>
+  </nav>
+</aside>
+<main id="course">
+<section class="hero" id="start" data-lesson>
+  <div class="eyebrow">A practical, project-first learning path</div>
+  <h1>Learn to script <span style="color:var(--green)">Unity.</span><br>Understand what’s underneath.</h1>
+  <p>Start with C# and build toward real Unity systems: scenes, tools, physics, animation, AI, multiplayer, and the Editor itself. Short lessons, honest explanations, and exercises you can actually complete right here.</p>
+  <div class="hero-stats"><span><strong>8</strong> course chapters</span><span><strong>Beginner → advanced</strong></span><span><strong>Browser-checked</strong> practice</span></div>
+  <div class="callout info"><strong>Scope note:</strong> The exercises check answers and code structure in your browser; they do not compile C# or run Unity. Use the provided snippets in a Unity project to verify engine behavior.</div>
+  <div class="chips"><span class="chip">No setup to start reading</span><span class="chip">Unity 6 concepts</span><span class="chip">C#  basics → systems</span></div>
+</section>
+
+<section class="section" id="csharp" data-lesson>
+  <div class="section-head"><div class="section-num">01</div><div><h2>C# foundations</h2><p class="section-intro">Unity scripting is C#. Learn the language building blocks first; the same skills apply whether you write a tiny behaviour or a large gameplay system.</p></div></div>
+  <div class="lesson-grid">
+    <article class="lesson"><h3>Values, variables &amp; types</h3><p>A variable names a value. C# is statically typed: the compiler checks that you use compatible types.</p><div class="code"><div class="code-label">C# · values</div><pre><code>int health = 100;
+float moveSpeed = 4.5f;
+bool isGrounded = false;
+string playerName = "Rook";
+
+health -= 10;                 // health is now 90
+Debug.Log($"{playerName}: {health}");</code></pre></div><p>Use <code class="inline">int</code> for whole numbers, <code class="inline">float</code> for common Unity decimals (with the <code class="inline">f</code> suffix), and <code class="inline">bool</code> for true/false.</p></article>
+    <article class="lesson"><h3>Decisions &amp; loops</h3><p>Branches choose behavior; loops repeat it. Prefer clear, bounded loops over work that can run forever.</p><div class="code"><div class="code-label">C# · control flow</div><pre><code>if (health &lt;= 0)
+{
+    Debug.Log("Out of health");
+}
+
+for (int i = 0; i &lt; 3; i++)
+{
+    Debug.Log($"Wave {i + 1}");
+}</code></pre></div></article>
+    <article class="lesson"><h3>Methods &amp; parameters</h3><p>Methods package work behind a name. Parameters are inputs; a return value is the output.</p><div class="code"><div class="code-label">C# · method</div><pre><code>float GetDamage(float baseDamage, float multiplier)
+{
+    return baseDamage * multiplier;
+}
+
+float hit = GetDamage(12f, 1.5f); // 18</code></pre></div></article>
+    <article class="lesson"><h3>Classes, objects &amp; encapsulation</h3><p>A class describes a kind of object. Fields store state; methods define behavior. Keep implementation details private and expose deliberate operations.</p><div class="code"><div class="code-label">C# · object design</div><pre><code>public class HealthPool
+{
+    public int Current { get; private set; }
+
+    public HealthPool(int startingHealth)
+    {
+        Current = startingHealth;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        Current = Math.Max(0, Current - amount);
+    }
+}</code></pre></div></article>
+    <article class="lesson"><h3>Collections, enums &amp; null</h3><p>Use arrays for fixed-size sequences, <code class="inline">List&lt;T&gt;</code> for growable lists, and dictionaries for key/value lookup. Enums name a limited set of states. Check references that may be null before using them.</p><div class="code"><div class="code-label">C# · collections</div><pre><code>enum DoorState { Locked, Closed, Open }
+List&lt;string&gt; inventory = new();
+inventory.Add("Key");
+
+if (inventory.Count &gt; 0)
+    Debug.Log(inventory[0]);</code></pre></div></article>
+    <article class="lesson"><h3>Interfaces, inheritance &amp; composition</h3><p>Inheritance says “is a”; interfaces say “can do”. Prefer small components cooperating over deep inheritance trees.</p><div class="code"><div class="code-label">C# · contract</div><pre><code>public interface IDamageable
+{
+    void TakeDamage(int amount);
+}
+
+public class Crate : MonoBehaviour, IDamageable
+{
+    public void TakeDamage(int amount) { /* ... */ }
+}</code></pre></div></article>
+  </div>
+  <div class="exercise" id="quiz-csharp"><span class="tag">Try it · 1 minute</span><h3>Pick the right type</h3><p>You need a value for whether a character is currently grounded. Which type is the natural fit?</p><label for="typeAnswer">Your answer</label><select id="typeAnswer"><option value="">Choose…</option><option>float</option><option>bool</option><option>string</option></select><div class="actions"><button class="btn primary" id="checkType">Check answer</button></div><div class="result" id="typeResult" aria-live="polite"></div></div>
+  <button class="complete-btn" data-complete="csharp">Mark chapter complete</button>
+</section>
+
+<section class="section" id="unity" data-lesson>
+  <div class="section-head"><div class="section-num">02</div><div><h2>Unity &amp; components</h2><p class="section-intro">Unity turns C# scripts into scene behaviors through GameObjects, Components, assets, and lifecycle callbacks.</p></div></div>
+  <div class="lesson-grid">
+    <article class="lesson"><h3>Project, scene, GameObject</h3><p>A project is the workspace and asset database. A scene is a saved arrangement of objects. A GameObject is a container; its Components give it data and behavior.</p><ul><li><strong>Transform</strong> is the basic position, rotation, and scale component.</li><li>Scripts, colliders, cameras, and renderers are components too.</li><li>Assets are project files; instances in a scene are not the same thing as their source asset.</li></ul></article>
+    <article class="lesson"><h3>Your first MonoBehaviour</h3><p>Attach a <code class="inline">MonoBehaviour</code> script to a GameObject to let Unity call its event methods.</p><div class="code"><div class="code-label">PlayerMover.cs</div><pre><code>using UnityEngine;
+
+public class PlayerMover : MonoBehaviour
+{
+    [SerializeField] private float speed = 5f;
+
+    void Update()
+    {
+        float x = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * x * speed * Time.deltaTime);
+    }
+}</code></pre></div><p>In a project, the public class name should match the script filename. Serialized private fields are editable in the Inspector without making them public.</p></article>
+    <article class="lesson"><h3>Inspector, references &amp; prefabs</h3><p>The Inspector edits serialized component data. Drag references into fields, or find them deliberately at runtime. Prefabs are reusable object templates with overrides and nested composition.</p><div class="code"><div class="code-label">Reference safely</div><pre><code>[SerializeField] private Transform target;
+
+void Start()
+{
+    if (target == null)
+        Debug.LogError("Assign a target in the Inspector", this);
+}</code></pre></div></article>
+    <article class="lesson"><h3>Lifecycle, in a useful order</h3><p><code class="inline">Awake</code> initializes this object; <code class="inline">OnEnable</code> subscribes/activates; <code class="inline">Start</code> runs before its first frame; <code class="inline">Update</code> runs per rendered frame; <code class="inline">OnDisable</code>/<code class="inline">OnDestroy</code> clean up.</p><div class="callout"><strong>Don't assume every object's Awake order.</strong> Use explicit initialization or Script Execution Order only when ordering is truly required.</div></article>
+  </div>
+  <div class="exercise" id="quiz-unity"><span class="tag">Try it · lifecycle</span><h3>Where does physics movement belong?</h3><p>You are changing a Rigidbody velocity on a fixed physics timestep. Which callback is intended for physics-timed work?</p><select id="physicsAnswer" aria-label="Physics callback"><option value="">Choose…</option><option>Update</option><option>FixedUpdate</option><option>LateUpdate</option></select><div class="actions"><button class="btn primary" id="checkPhysics">Check answer</button></div><div class="result" id="physicsResult" aria-live="polite"></div></div>
+  <button class="complete-btn" data-complete="unity">Mark chapter complete</button>
+</section>
+
+<section class="section" id="gameplay" data-lesson>
+  <div class="section-head"><div class="section-num">03</div><div><h2>Gameplay scripting</h2><p class="section-intro">Connect input, time, physics, animation, UI, and data into maintainable game behavior.</p></div></div>
+  <div class="lesson-grid">
+    <article class="lesson"><h3>Input &amp; frame time</h3><p>For new projects, Unity's Input System package provides action maps, rebinding, and device abstractions. Poll or subscribe to actions deliberately. Scale frame-based movement with delta time.</p><div class="code"><div class="code-label">Simple movement</div><pre><code>void Update()
+{
+    Vector2 move = moveAction.ReadValue&lt;Vector2&gt;();
+    Vector3 direction = new(move.x, 0f, move.y);
+    transform.position += direction * speed * Time.deltaTime;
+}</code></pre></div></article>
+    <article class="lesson"><h3>Physics &amp; collision</h3><p>Use a Rigidbody for physics-driven motion and colliders for contact. Apply forces in <code class="inline">FixedUpdate</code> when continuously simulating; collision callbacks report contacts. Avoid moving a dynamic Rigidbody by directly changing its Transform.</p><div class="code"><div class="code-label">Physics callback</div><pre><code>void FixedUpdate()
+{
+    body.AddForce(moveDirection * acceleration);
+}
+
+void OnCollisionEnter(Collision hit)
+{
+    Debug.Log($"Hit {hit.gameObject.name}");
+}</code></pre></div></article>
+    <article class="lesson"><h3>Coroutines &amp; async work</h3><p>A coroutine pauses and resumes on Unity's main thread. It is useful for sequences and delays, not parallel CPU work. Use cancellation and lifecycle cleanup; use async APIs for supported asynchronous operations.</p><div class="code"><div class="code-label">Wait, then act</div><pre><code>IEnumerator FlashAfterDelay(float seconds)
+{
+    yield return new WaitForSeconds(seconds);
+    renderer.enabled = !renderer.enabled;
+}</code></pre></div></article>
+    <article class="lesson"><h3>Animation &amp; UI</h3><p>Drive Animator parameters from gameplay state instead of hard-coding animation timing. Use UI Toolkit or uGUI consistently for the project's needs; update visible UI when data changes rather than searching the scene every frame.</p></article>
+    <article class="lesson"><h3>Events &amp; ScriptableObjects</h3><p>Events decouple a sender from listeners, but always unsubscribe. ScriptableObjects are project assets suited to shared configuration and authored data—not a magic replacement for runtime save data.</p><div class="code"><div class="code-label">Simple event subscription</div><pre><code>void OnEnable()  =&gt; health.Damaged += OnDamaged;
+void OnDisable() =&gt; health.Damaged -= OnDamaged;</code></pre></div></article>
+    <article class="lesson"><h3>Architecture that stays understandable</h3><p>Give each component a clear responsibility. Inject references, validate assumptions, separate game rules from presentation, and profile before optimizing. Patterns such as state machines and object pools solve specific problems; they are not requirements for every project.</p></article>
+  </div>
+  <div class="exercise" id="exercise-code"><span class="tag">Try it · finish the script</span><h3>Complete the delta-time line</h3><p>Add the missing expression inside <code class="inline">Move()</code> so the object moves right at <code class="inline">speed</code> units per second, independent of frame rate. This checks the code pattern; it does not compile C#.</p><textarea id="codeAnswer" spellcheck="false" aria-label="C sharp code exercise">void Move()
+{
+    transform.position += Vector3.right * speed;
+}</textarea><div class="actions"><button class="btn primary" id="checkCode">Run checks</button><button class="btn" id="resetCode">Reset starter</button><span class="chip">Hint: scale by elapsed frame time</span></div><div class="result" id="codeResult" aria-live="polite"></div></div>
+  <button class="complete-btn" data-complete="gameplay">Mark chapter complete</button>
+</section>
+
+<section class="section" id="editor" data-lesson>
+  <div class="section-head"><div class="section-num">04</div><div><h2>Inside the Unity Editor</h2><p class="section-intro">The Editor is an application for authoring and running projects—not simply a visual front end. Its architecture combines native engine/editor code with managed C# tooling and an extensible package ecosystem.</p></div></div>
+  <article class="lesson wide"><h3>A useful mental model</h3><div class="diagram"><div><strong>Native core</strong>Engine, platform, rendering and editor services (largely C++)</div><div><strong>Managed layer</strong>C# runtime APIs and editor-facing managed code</div><div><strong>Packages</strong>Optional tools and features with versioned APIs</div><div><strong>Editor UI</strong>Windows, inspectors, importers and custom tools</div></div><p>Exact implementation varies by subsystem and Unity version. The Editor is not a single C# program: native subsystems provide core engine functionality, while managed code exposes APIs and supports many extensibility workflows. UI Toolkit and IMGUI are UI technologies, not the whole Editor implementation.</p></article>
+  <div class="lesson-grid">
+    <article class="lesson"><h3>What happens when scripts compile?</h3><p>Unity imports assets, compiles assemblies, refreshes editor state, and reloads managed code when needed. Assembly Definition assets (<code class="inline">.asmdef</code>) partition code into assemblies, can reduce recompilation scope, and express references. Enter Play Mode may reload domain and scene state depending on settings.</p></article>
+    <article class="lesson"><h3>Custom Editor tooling</h3><p>Editor-only code belongs in an <code class="inline">Editor</code> folder or editor-only assembly. Custom inspectors and windows use Editor APIs, such as UI Toolkit or IMGUI. Keep editor references out of player builds.</p><div class="code"><div class="code-label">Editor-only guard example</div><pre><code>#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+// Prefer keeping editor scripts in an Editor-only assembly.</code></pre></div></article>
+    <article class="lesson"><h3>Import pipeline &amp; asset database</h3><p>When files change, importers convert source assets into engine-ready data and maintain references/dependencies. Meta files carry stable asset identity; version-control them alongside assets. Avoid casually editing generated Library data.</p></article>
+    <article class="lesson"><h3>Play Mode is a simulation workflow</h3><p>The Editor enters Play Mode by initializing runtime systems and loading scene state. It can differ from a built player in timing, platform APIs, graphics, and asset inclusion. Test in player builds too.</p></article>
+  </div>
+  <button class="complete-btn" data-complete="editor">Mark chapter complete</button>
+</section>
+
+<section class="section" id="systems" data-lesson>
+  <div class="section-head"><div class="section-num">05</div><div><h2>Engine systems &amp; deeper C#</h2><p class="section-intro">Choose the right Unity subsystem, understand what it does, and know when advanced programming tools help.</p></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Area</th><th>What to learn</th><th>Good first experiment</th></tr></thead><tbody>
+    <tr><td>Rendering</td><td>Built-in, URP and HDRP tradeoffs; cameras, materials, shaders, lighting and render passes.</td><td>Make a material and inspect it with Frame Debugger.</td></tr>
+    <tr><td>Assets &amp; content</td><td>Addressables, async loading, asset bundles, serialization, Resources caveats and memory lifetimes.</td><td>Load and release one Addressable asset.</td></tr>
+    <tr><td>Animation &amp; audio</td><td>Animator state machines, Timeline, mixers, spatial audio and lifecycle.</td><td>Trigger one animation state from a gameplay event.</td></tr>
+    <tr><td>Testing &amp; profiling</td><td>Edit/Play Mode tests, Profiler, Memory Profiler, Frame Debugger and reproducible measurements.</td><td>Write a test for a pure gameplay rule.</td></tr>
+    <tr><td>Performance</td><td>Allocations/GC, batching, draw calls, pooling, Jobs and Burst; measure before optimizing.</td><td>Compare a measured hot path before and after a change.</td></tr>
+    <tr><td>DOTS / Entities</td><td>Data-oriented design, entities, components, systems and baking. It is a different workflow, not a compulsory upgrade.</td><td>Convert a small repeated simulation only after profiling.</td></tr>
+  </tbody></table></div>
+  <div class="callout"><strong>Advanced C# topics worth learning:</strong> value vs reference types, generics, delegates/events, LINQ (with allocation awareness), interfaces, exceptions, serialization, assemblies, and async fundamentals. Use features that improve clarity in your team's supported C# version.</div>
+  <button class="complete-btn" data-complete="systems">Mark chapter complete</button>
+</section>
+
+<section class="section" id="ml" data-lesson>
+  <div class="section-head"><div class="section-num">06</div><div><h2>ML-Agents &amp; game AI</h2><p class="section-intro">Unity ML-Agents connects a Unity environment to reinforcement-learning and imitation-learning workflows. It is a training toolkit—not an automatic “make smart enemies” button.</p></div></div>
+  <div class="lesson-grid">
+    <article class="lesson"><h3>Agent, observations, actions, rewards</h3><p>An Agent gathers observations, requests an action, applies that action to the environment, then receives reward and episode signals. Training runs through a trainer configuration; a trained policy is later used for inference.</p></article>
+    <article class="lesson"><h3>Design the learning problem</h3><ul><li>Observations should contain enough information to choose an action.</li><li>Action spaces should be as small as the task allows.</li><li>Rewards should align with the real goal; sparse rewards can make learning difficult.</li><li>Reset episodes consistently, and avoid leaking answers into observations.</li></ul></article>
+    <article class="lesson"><h3>Typical workflow</h3><p>Install a compatible ML-Agents package/toolchain version, create a Behavior Parameters setup, implement Agent callbacks, configure a trainer, collect training runs, inspect results, then test the exported policy in the actual environment.</p><div class="code"><div class="code-label">Agent skeleton · API shape varies by package version</div><pre><code>public override void CollectObservations(VectorSensor sensor)
+{
+    sensor.AddObservation(targetDirection);
+}
+
+public override void OnActionReceived(ActionBuffers actions)
+{
+    ApplyMove(actions.ContinuousActions);
+}
+
+public override void OnEpisodeBegin()
+{
+    ResetEnvironment();
+}</code></pre></div></article>
+    <article class="lesson"><h3>Common failure modes</h3><p>Reward hacking, observations with inconsistent scaling, overly complex actions, nondeterministic resets, and training distributions that differ from deployment. Track metrics and evaluate on scenarios the agent did not train on.</p></article>
+  </div>
+  <div class="sim-card"><span class="tag">Interactive toy model · not an ML trainer</span><h3>Feel the reward signal</h3><p class="section-intro">Move the toy agent toward the goal. It receives positive reward for reducing distance and a small cost per step. Real policy learning requires many episodes and a training algorithm.</p><div class="sim-stage" id="agentStage" aria-label="Agent navigation simulation"><span class="target">◆ GOAL</span><span class="agent" id="agent">A</span></div><div class="sim-controls"><button class="btn primary" id="stepAgent">Take action</button><button class="btn" id="resetAgent">Reset episode</button><span>Reward: <strong id="rewardValue">0.00</strong></span><span>Steps: <strong id="stepValue">0</strong></span></div><div class="sim-log" id="agentLog" aria-live="polite">Observe position → choose a move → receive reward.</div></div>
+  <button class="complete-btn" data-complete="ml">Mark chapter complete</button>
+</section>
+
+<section class="section" id="multiplayer" data-lesson>
+  <div class="section-head"><div class="section-num">07</div><div><h2>Multiplayer &amp; networking</h2><p class="section-intro">Networking adds latency, authority, synchronization, security, and failure modes. Decide your architecture before choosing a package.</p></div></div>
+  <div class="lesson-grid">
+    <article class="lesson"><h3>Client-server fundamentals</h3><p>A client-server model gives a server authority over important game state; peers send intent and receive replicated state. A server-authoritative design reduces cheating opportunities, but needs prediction/reconciliation for responsive controls.</p></article>
+    <article class="lesson"><h3>State sync vs messages</h3><p>Replicate state that other players need; send events/messages for one-time actions. Choose update rates and compression according to gameplay. Interpolate remote entities; don't blindly send every Transform every frame.</p></article>
+    <article class="lesson"><h3>Unity networking choices</h3><p>Netcode for GameObjects suits GameObject-oriented workflows; Netcode for Entities targets data-oriented architectures. Relay/Lobby or a dedicated server may support different hosting models. Verify current package compatibility, service terms, and platform requirements when you select your stack.</p></article>
+    <article class="lesson"><h3>Latency, prediction &amp; security</h3><p>Clients can predict local movement, then reconcile against server truth. Interpolation smooths remote updates. Validate client commands on the server: never trust a client-provided score, damage value, or ownership claim.</p></article>
+  </div>
+  <div class="sim-card"><span class="tag">Interactive network sketch</span><h3>Why latency makes prediction matter</h3><p>Adjust round-trip time. A plain request/response waits roughly one RTT before the server answer comes back; client prediction shows an immediate local response and reconciles later.</p><div class="sim-controls"><label for="latency">Round-trip latency: <strong id="latencyRead">180 ms</strong></label><input id="latency" type="range" min="20" max="500" step="10" value="180"><button class="btn primary" id="sendMove">Send move</button><button class="btn" id="predictMove">Predict locally</button></div><div class="sim-log" id="networkLog" aria-live="polite">Server position: 0 · Client display: 0</div></div>
+  <button class="complete-btn" data-complete="multiplayer">Mark chapter complete</button>
+</section>
+
+<section class="section" id="shipping" data-lesson>
+  <div class="section-head"><div class="section-num">08</div><div><h2>Debug, test &amp; ship</h2><p class="section-intro">A script is only done when it behaves in the target build and survives the project workflow.</p></div></div>
+  <div class="lesson-grid">
+    <article class="lesson"><h3>Debugging habits</h3><ul><li>Read the first Console error and its stack trace.</li><li>Use breakpoints and inspect values; avoid relying only on log spam.</li><li>Reproduce with a small scene and known inputs.</li><li>Check object references, execution order, and active/enabled state.</li></ul></article>
+    <article class="lesson"><h3>Test layers</h3><p>Unit-test deterministic game rules without scenes where possible. Use Unity Test Framework Edit Mode tests for pure/editor logic and Play Mode tests for engine behavior. Add build/device checks for platform-specific features.</p></article>
+    <article class="lesson"><h3>Version control &amp; build</h3><p>Use text serialization and visible meta files for collaboration; choose Git LFS for large binary assets where appropriate. Commit project settings intentionally, pin package versions, and make builds reproducible.</p></article>
+    <article class="lesson"><h3>Next project ladder</h3><ol><li>Write a C# console-style rules exercise.</li><li>Make one controllable object and test its movement.</li><li>Add collisions, a UI state, and a restart loop.</li><li>Build a small custom Editor tool.</li><li>Explore an agent or a two-player network prototype only after the single-player loop is stable.</li></ol></article>
+  </div>
+  <button class="complete-btn" data-complete="shipping">Mark chapter complete</button>
+</section>
+<div class="no-results" id="noResults">No matching lessons. Try another search term.</div>
+<footer>Unity Script School · Learn concepts, verify code in your project, and check official Unity package docs for version-specific APIs.</footer>
+</main>
+</div>
+<script>
+(() => {
+  const chapters = ['start','csharp','unity','gameplay','editor','systems','ml','multiplayer','shipping'];
+  const storageKey = 'unity-script-school-progress-v1';
+  let completed = {};
+  try { completed = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch { completed = {}; }
+  const updateProgress = () => {
+    const trackableChapters = chapters.filter(id => id !== 'start');
+    const count = trackableChapters.filter(id => completed[id]).length;
+    document.getElementById('progressText').textContent = `${count} / ${trackableChapters.length} done`;
+    document.getElementById('progressBar').style.width = `${count / trackableChapters.length * 100}%`;
+    document.querySelectorAll('[data-complete]').forEach(button => {
+      const done = Boolean(completed[button.dataset.complete]);
+      button.classList.toggle('done', done);
+      button.textContent = done ? '✓ Chapter complete' : 'Mark chapter complete';
+    });
+    try { localStorage.setItem(storageKey, JSON.stringify(completed)); } catch { /* progress still works for this page view */ }
+  };
+  document.querySelectorAll('[data-complete]').forEach(button => button.addEventListener('click', () => {
+    const key = button.dataset.complete;
+    completed[key] = !completed[key];
+    updateProgress();
+  }));
+  updateProgress();
+
+  const showResult = (id, message, good) => {
+    const result = document.getElementById(id);
+    result.textContent = message;
+    result.className = `result ${good ? 'good' : 'bad'}`;
+  };
+  document.getElementById('checkType').addEventListener('click', () => {
+    const answer = document.getElementById('typeAnswer').value;
+    showResult('typeResult', answer === 'bool' ? 'Correct: grounded is a true/false state, so bool is a natural fit.' : answer ? 'Not quite. Ask whether this state is a measurement or a yes/no condition.' : 'Choose an answer first.', answer === 'bool');
+  });
+  document.getElementById('checkPhysics').addEventListener('click', () => {
+    const answer = document.getElementById('physicsAnswer').value;
+    showResult('physicsResult', answer === 'FixedUpdate' ? 'Correct: FixedUpdate follows the fixed physics timestep.' : answer ? 'Try again: choose the callback aligned with Unity’s physics simulation step.' : 'Choose an answer first.', answer === 'FixedUpdate');
+  });
+  const codeStarter = 'void Move()\n{\n    transform.position += Vector3.right * speed;\n}';
+  document.getElementById('checkCode').addEventListener('click', () => {
+    const answer = document.getElementById('codeAnswer').value;
+    const hasDelta = /Time\.deltaTime/.test(answer);
+    const movesRight = /Vector3\.right/.test(answer) || /Vector3\.(right|forward)/.test(answer);
+    const usesSpeed = /\bspeed\b/.test(answer);
+    showResult('codeResult', hasDelta && movesRight && usesSpeed ? 'All checks passed: rightward displacement is scaled by speed and elapsed frame time. Try it in Unity and consider how input direction should be added.' : `Not yet: ${[!movesRight && 'include rightward movement', !usesSpeed && 'use speed', !hasDelta && 'multiply by Time.deltaTime'].filter(Boolean).join('; ')}.`, hasDelta && movesRight && usesSpeed);
+  });
+  document.getElementById('resetCode').addEventListener('click', () => {
+    document.getElementById('codeAnswer').value = codeStarter;
+    showResult('codeResult', '', false);
+  });
+
+  const stage = document.getElementById('agentStage');
+  const agent = document.getElementById('agent');
+  let ax = 20, ay = 100, reward = 0, steps = 0;
+  const renderAgent = () => { agent.style.left = `${ax}px`; agent.style.top = `${ay}px`; document.getElementById('rewardValue').textContent = reward.toFixed(2); document.getElementById('stepValue').textContent = steps; };
+  const moveAgent = () => {
+    const before = Math.hypot(stage.clientWidth - 40 - ax, 28 - ay);
+    ax = Math.min(stage.clientWidth - 42, ax + 24);
+    if (ay > 45) ay -= 18; else if (ay < 12) ay += 18;
+    const after = Math.hypot(stage.clientWidth - 40 - ax, 28 - ay);
+    const gained = before > after ? 0.1 : -0.05;
+    reward += gained; steps++;
+    renderAgent();
+    document.getElementById('agentLog').textContent = ax >= stage.clientWidth - 48 ? `Goal reached! Episode reward: ${reward.toFixed(2)}. Reset to try again.` : `Distance ${before.toFixed(0)} → ${after.toFixed(0)} · reward ${gained > 0 ? '+' : ''}${gained.toFixed(2)} · the learner needs a policy to choose actions.`;
+  };
+  document.getElementById('stepAgent').addEventListener('click', moveAgent);
+  document.getElementById('resetAgent').addEventListener('click', () => { ax = 20; ay = 100; reward = 0; steps = 0; renderAgent(); document.getElementById('agentLog').textContent = 'Episode reset. Observe position → choose a move → receive reward.'; });
+  renderAgent();
+  window.addEventListener('resize', () => { ax = Math.min(ax, stage.clientWidth - 42); renderAgent(); });
+
+  const latency = document.getElementById('latency');
+  const latencyRead = document.getElementById('latencyRead');
+  let serverPosition = 0, clientPosition = 0;
+  latency.addEventListener('input', () => { latencyRead.textContent = `${latency.value} ms`; });
+  const renderNetwork = (extra = '') => { document.getElementById('networkLog').textContent = `Server position: ${serverPosition} · Client display: ${clientPosition}${extra ? ' · ' + extra : ''}`; };
+  document.getElementById('sendMove').addEventListener('click', () => {
+    const delay = Number(latency.value);
+    document.getElementById('networkLog').textContent = `Request traveling… estimated round trip ${delay} ms`;
+    setTimeout(() => { serverPosition++; clientPosition = serverPosition; renderNetwork('server confirmed'); }, delay);
+  });
+  document.getElementById('predictMove').addEventListener('click', () => {
+    clientPosition++;
+    renderNetwork('predicted immediately; reconcile with server after reply');
+    const delay = Number(latency.value);
+    setTimeout(() => { serverPosition++; clientPosition = serverPosition; renderNetwork('authoritative state reconciled'); }, delay);
+  });
+
+  const search = document.getElementById('search');
+  const lessons = [...document.querySelectorAll('[data-lesson]')];
+  search.addEventListener('input', () => {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+    lessons.forEach(section => {
+      const match = !query || section.textContent.toLowerCase().includes(query);
+      section.hidden = !match;
+      if (match) visible++;
+    });
+    document.getElementById('noResults').style.display = visible ? 'none' : 'block';
+  });
+  const links = [...document.querySelectorAll('#courseNav a')];
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (entry.isIntersecting) links.forEach(link => link.classList.toggle('active', link.hash === `#${entry.target.id}`));
+  }), {rootMargin:'-20% 0px -65% 0px'});
+  chapters.forEach(id => { const section = document.getElementById(id); if (section) observer.observe(section); });
+})();
+</script>
+</body>
+</html>
